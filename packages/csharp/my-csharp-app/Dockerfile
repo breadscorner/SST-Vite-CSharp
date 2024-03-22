@@ -15,4 +15,4 @@ FROM public.ecr.aws/lambda/dotnet:8 AS runtime
 WORKDIR /var/task
 COPY --from=build-env /publish .
 
-CMD ["MyFirstCSharpFunction"]
+CMD ["my-csharp-app"]
