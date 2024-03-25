@@ -12,10 +12,10 @@ function App() {
 
   return (
     <div>
-      <div className="flex">
+      <div>
       <NavBar />
       </div>
-      <div className="card">
+      <div>
         <button onClick={onClick}>
           Message is "<i>{message}</i>"
         </button>

@@ -5,9 +5,8 @@ import NavProIcon from "./icons/nav-pro-icon";
 export default function NavBar() {
   
   return (
-    <div>
-      <nav className="mb-4">
-        <ul className="flex">
+      <nav>
+        <ul>
           <li>
             <a href="/">
               <NavHomeIcon />
@@ -25,6 +24,5 @@ export default function NavBar() {
           </li>
         </ul>
       </nav>
-    </div>
   );
 }
