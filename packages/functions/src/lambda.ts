@@ -3,7 +3,7 @@ import { handle } from "hono/aws-lambda";
 
 const app = new Hono();
 
-const route = app.get("/", (c) => {
+const route = app.get("/api", (c) => {
   return c.json({ message: "Hello Hono!", name: "hi", age: 10 });
 });
 

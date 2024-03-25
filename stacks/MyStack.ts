@@ -3,7 +3,7 @@ import { StackContext, Api, StaticSite } from "sst/constructs";
 export function API({ stack }: StackContext) {
   const api = new Api(stack, "api", {
     routes: {
-      "GET /api": "packages/functions/src/lambda.handler", // Example API route
+      "GET /api": "packages/functions/src/lambda.handler", 
       "GET /hello": "packages/functions/src/hello.handler",
       "GET /hello-jsx": "packages/functions/src/hello-jsx.handler",
       "GET /cs": {
