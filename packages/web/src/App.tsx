@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import NavBar from "./components/navbar";
 
 function App() {
   const [message, setMessage] = useState("Hi 👋");
@@ -11,7 +11,10 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
+      <div className="flex">
+      <NavBar />
+      </div>
       <div className="card">
         <button onClick={onClick}>
           Message is "<i>{message}</i>"
