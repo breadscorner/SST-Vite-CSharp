@@ -1,8 +1,9 @@
 import { useState } from "react";
 import NavBar from "./components/navbar";
+import './index.css'
 
 function App() {
-  const [message, setMessage] = useState("Hi 👋");
+  const [message, setMessage] = useState("Click Me!");
 
   async function onClick() {
     const res = await fetch(import.meta.env.VITE_APP_API_URL + "/api")
@@ -12,12 +13,12 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className="my-4">
       <NavBar />
       </div>
-      <div>
-        <button onClick={onClick}>
-          Message is "<i>{message}</i>"
+      <div className="flex h-screen items-center justify-center ">
+        <button className="text-white border hover:bg-white hover hover:text-[#00033b] ease-in-out duration-300 rounded-lg px-4 py-2" onClick={onClick}>
+          "<i>{message}</i>"
         </button>
       </div>
     </div>
