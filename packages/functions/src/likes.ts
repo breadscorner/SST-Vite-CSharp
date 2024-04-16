@@ -15,5 +15,4 @@ app.post('/likes', async (c) => {
   return c.json({liked: liked})
 })
 
-
 export const handler = handle(app)

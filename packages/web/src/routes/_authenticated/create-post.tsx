@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 
 export const Route = createFileRoute("/_authenticated/create-post")({
@@ -14,6 +14,8 @@ function CreatePostPage() {
 
   const { user, getToken } = useKindeAuth();
 
+  const navigate = useNavigate({ from: "/create-post" });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const submitButton = document.getElementById(
@@ -27,6 +29,7 @@ function CreatePostPage() {
 
     const response = await uploadPost();
     console.log(response);
+    navigate({ to: "/" });
 
     if (submitButton) {
       submitButton.disabled = false;
@@ -36,7 +39,6 @@ function CreatePostPage() {
     setTitle("");
     setDescription("");
     setImage(null);
-    window.location.reload();
   };
 
   async function uploadPost() {

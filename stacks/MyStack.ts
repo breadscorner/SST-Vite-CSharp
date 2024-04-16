@@ -1,7 +1,9 @@
-import { StackContext, Api, StaticSite } from "sst/constructs";
+import { StackContext, Api, StaticSite, Bucket } from "sst/constructs";
 
 export function API({ stack }: StackContext) {
   const audience = "https://breadscorner.kinde.com/api";
+
+  const assetsBucket = new Bucket(stack, "assets");
 
   const api = new Api(stack, "api", {
     authorizers: {
@@ -49,8 +51,19 @@ export function API({ stack }: StackContext) {
         },
       },
       // "GET /hello-jsx": "packages/functions/src/hello-jsx.handler",
+      "POST /signed-url": {
+        authorizer: "none",
+        function: {
+          environment: {
+            ASSETS_BUCKET_NAME: assetsBucket.bucketName,
+          },
+          handler: "packages/functions/src/s3.handler",
+        },
+      },
     },
   });
+
+  api.attachPermissionsToRoute("POST /signed-url", [assetsBucket, "grantPut"]);
 
   const web = new StaticSite(stack, "web", {
     path: "packages/web",
