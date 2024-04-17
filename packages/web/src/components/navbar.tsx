@@ -12,7 +12,7 @@ export default function NavBar() {
   }
 
   return (
-    <nav>
+    <nav className="pb-4 border-b border-black">
       <ul>
         <li>
           <Link to="/">

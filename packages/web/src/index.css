@@ -3,7 +3,8 @@
 @import 'tailwindcss/utilities';
 
 body {
-background-color: #ace8ff
+background-color: #ecd0ff;
+margin: 0 10%;
 }
 
 ul {
