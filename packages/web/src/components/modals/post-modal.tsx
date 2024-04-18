@@ -42,6 +42,14 @@ const PostModal: React.FC<PostModalProps> = ({ post, onClose, token }) => {
         <div className="p-4 flex flex-col justify-between">
           <div>
             <h2 className="text-2xl font-semibold">{post.title}</h2>
+            <p className="py-2 text-[#ff96ed] text-sm">
+              {new Date(post.createdAt).toLocaleDateString("en-US", {
+                weekday: "short",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
             <p className="text-gray-700">{post.description}</p>
           </div>
           <div className="flex items-center justify-between mt-4">

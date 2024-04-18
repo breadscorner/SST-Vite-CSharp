@@ -118,6 +118,11 @@ function CreatePostPage() {
     }
   };
 
+  const setTitleFormatted = (value: string) => {
+    const capitalizedTitle = value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+    setTitle(capitalizedTitle);
+  };
+  
   return (
     <div className="p-5 min-h-screen">
       <div className="flex items-center justify-between">
@@ -143,7 +148,7 @@ function CreatePostPage() {
                 placeholder="Picture Title"
                 required
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setTitleFormatted(e.target.value)}
               />
               <textarea
                 className="w-full text-base p-2 border border-gray-200 shadow-lg rounded-md focus:outline-none focus:border-indigo-500"

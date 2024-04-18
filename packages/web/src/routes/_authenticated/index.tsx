@@ -121,38 +121,53 @@ function HomePage() {
       <div className="mt-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {posts.map((post) => (
-            <div key={post.id}>
-              <div
-                className="rounded bg-white border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                onClick={() => setSelectedPost(post)}
-              >
-                <img
-                  src={post.url}
-                  alt="Post"
-                  className="w-full h-48 object-cover rounded-t"
-                />
-                <div className="relative mt-2 mx-2">
-                  <p className="px-2 text-xl font-semibold mb-2">
-                    {post.title}
-                  </p>
-                  <p className="px-2 pb-2 h-[50px] overflow-hidden">
-                    <span className="block max-h-[3em] overflow-hidden whitespace-nowrap overflow-ellipsis">
-                      {post.description}
-                    </span>
-                  </p>
-                  <div className="flex justify-center border-t items-center">
-                    <button
-                      onClick={() => likePost(parseInt(post.id))}
-                      className="px-4 py-2 rounded text-gray-800 flex items-center"
-                    >
-                      {isPostLiked(parseInt(post.id)) ? (
-                        <FaRegHeart className="mr-1 text-red-500" />
-                      ) : (
-                        <FaRegHeart className="mr-1" />
-                      )}
-                      {post.numLikes}
-                    </button>
-                  </div>
+            <div
+              key={post.id}
+              className="rounded bg-white border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
+              onClick={(e) => {
+                const target = e.target as HTMLElement;
+                if (!target.closest || !target.closest(".like-button")) {
+                  setSelectedPost(post);
+                }
+              }}
+            >
+              <img
+                src={post.url}
+                alt="Post"
+                className="w-full h-48 object-cover rounded-t"
+              />
+              <div className="relative mt-2 mx-2">
+                <p className="px-2 text-xl font-semibold mb-2 overflow-hidden whitespace-nowrap overflow-ellipsis">
+                  {post.title}
+                </p>
+                <p className="px-2 pb-2 text-[#ff96ed] text-xs">
+                  {new Date(post.createdAt).toLocaleDateString("en-US", {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p className="px-2 pb-2 h-[50px] overflow-hidden">
+                  <span className="block max-h-[3em] overflow-hidden whitespace-nowrap overflow-ellipsis">
+                    {post.description}
+                  </span>
+                </p>
+                <div className="flex justify-center border-t items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      likePost(parseInt(post.id));
+                    }}
+                    className="px-4 py-2 rounded text-gray-800 flex items-center like-button"
+                  >
+                    {isPostLiked(parseInt(post.id)) ? (
+                      <FaRegHeart className="mr-1 text-red-500" />
+                    ) : (
+                      <FaRegHeart className="mr-1" />
+                    )}
+                    {post.numLikes}
+                  </button>
                 </div>
               </div>
             </div>
