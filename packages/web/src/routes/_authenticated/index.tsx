@@ -19,6 +19,7 @@ function HomePage() {
 
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Fetch data when component mounts
 
   useEffect(() => {
