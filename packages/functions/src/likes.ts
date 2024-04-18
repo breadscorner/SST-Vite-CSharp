@@ -6,6 +6,8 @@ const app = new Hono()
 import { likes as likesTable } from "@my-sst-app/core/db/schema/likes";
 import { db } from "@my-sst-app/core/db";
 
+// import { authMiddleware } from '@my-sst-app/core/auth';
+
 app.post('/likes', async (c) => {
   const body = await c.req.json();
   const postId = body.postId

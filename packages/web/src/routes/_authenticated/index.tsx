@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FaRegHeart } from "react-icons/fa";
 import PostModal from "../../components/modals/post-modal.tsx";
 import { Like, Post } from "../../utils/types.ts";
+import NavBar from "../../components/navbar.tsx";
 
 export const Route = createFileRoute("/_authenticated/")({
   component: HomePage,
@@ -107,9 +108,16 @@ function HomePage() {
 
   return (
     <div className="p-5 min-h-screen">
-      <h1 className="mt-4 text-3xl font-semibold">
-        Welcome, {user?.given_name}
-      </h1>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-semibold">
+            Welcome, {user?.given_name}
+          </h1>
+        </div>
+        <div className="flex items-center">
+          <NavBar />
+        </div>
+      </div>
       <div className="mt-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {posts.map((post) => (
@@ -133,7 +141,7 @@ function HomePage() {
                     </span>
                   </p>
                   <div className="flex justify-center border-t items-center">
-                  <button
+                    <button
                       onClick={() => likePost(parseInt(post.id))}
                       className="px-4 py-2 rounded text-gray-800 flex items-center"
                     >
@@ -144,7 +152,7 @@ function HomePage() {
                       )}
                       {post.numLikes}
                     </button>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>

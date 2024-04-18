@@ -25,7 +25,7 @@ export function API({ stack }: StackContext) {
     },
 
     routes: {
-      // "GET /api": "packages/functions/src/lambda.handler",
+      "GET /api": "packages/functions/src/lambda.handler",
       "GET /posts": {
         authorizer: "none",
         function: {
@@ -58,6 +58,12 @@ export function API({ stack }: StackContext) {
             ASSETS_BUCKET_NAME: assetsBucket.bucketName,
           },
           handler: "packages/functions/src/s3.handler",
+        },
+      },
+      "GET /": {
+        function: {
+          handler: "packages/csharp/my-csharp-app",
+          runtime: "container",
         },
       },
     },

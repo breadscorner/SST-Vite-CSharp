@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import NavBar from "../../components/navbar";
 
 export const Route = createFileRoute("/_authenticated/create-post")({
   component: CreatePostPage,
@@ -118,81 +119,93 @@ function CreatePostPage() {
   };
 
   return (
-    <div className="relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover">
-      <div className="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10">
-        <div className="text-center">
-          <p className="mt-2 text-md text-gray-400">Post a Picture!</p>
+    <div className="p-5 min-h-screen">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-semibold">
+            Share Your Thoughts, {user?.given_name}
+          </h1>
         </div>
-        <form className="mt-8 space-y-3" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 space-y-2">
-            <input
-              className="w-full text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-              type="text"
-              placeholder="Picture Title"
-              required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              className="w-full text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-              placeholder="Description"
-              required
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+        <div className="flex items-center">
+          <NavBar />
+        </div>
+      </div>
+      <div className="relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover">
+        <div className="sm:max-w-lg w-full p-10 bg-white rounded-md z-10 border border-gray-200 shadow-lg">
+          <div className="text-center">
+            <h2 className="mt-2 text-xl text-gray-400">Share A Post</h2>
           </div>
-          <div className="grid grid-cols-1 space-y-2">
-            <div className="text-sm font-bold text-gray-500 tracking-wide">
-              Attach an Image
+          <form className="mt-8 space-y-3" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 space-y-2">
+              <input
+                className="w-full text-base p-2 border border-gray-200 shadow-lg rounded-md focus:outline-none focus:border-indigo-500"
+                type="text"
+                placeholder="Picture Title"
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <textarea
+                className="w-full text-base p-2 border border-gray-200 shadow-lg rounded-md focus:outline-none focus:border-indigo-500"
+                placeholder="Description"
+                required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
-            <div className="flex items-center justify-center w-full">
-              <div className="flex flex-col rounded-lg border-4 border-dashed w-full p-10 group text-center">
-                <div className="h-full w-full te    xt-center flex flex-col items-center justify-center">
-                  <div className="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10"></div>
-                  {previewImageUrl && image && (
-                    <div className="mt-4">
-                      {image.type.startsWith("image/") ? (
-                        <img src={previewImageUrl} alt="Selected file" />
-                      ) : image.type.startsWith("video/") ? (
-                        <video src={previewImageUrl} controls />
-                      ) : null}
+            <div className="grid grid-cols-1 space-y-2">
+              <div className="text-sm font-bold text-gray-500 tracking-wide">
+                Attach an Image
+              </div>
+              <div className="flex items-center justify-center w-full">
+                <div className="flex flex-col rounded-lg border-4 border-gray-300 border-dashed w-full p-10 group text-center">
+                  <div className="h-full w-full text-center flex flex-col items-center justify-center">
+                    <div className="flex flex-auto max-h-48 w-2/5 mx-auto"></div>
+                    {previewImageUrl && image && (
+                      <div className="mt-4">
+                        {image.type.startsWith("image/") ? (
+                          <img src={previewImageUrl} alt="Selected file" />
+                        ) : image.type.startsWith("video/") ? (
+                          <video src={previewImageUrl} controls />
+                        ) : null}
+                      </div>
+                    )}
+                    <div className="pointer-none text-[#ff96ed] hover:scale-105 duration-300">
+                      <button
+                        style={{
+                          display: "block",
+                          width: "120px",
+                          height: "30px",
+                        }}
+                        onClick={handleFileClick}
+                      >
+                        Select Image
+                      </button>
+                      <input
+                        type="file"
+                        id="getImage"
+                        accept="image/jpg,image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm"
+                        style={{ display: "none" }}
+                        onChange={(e) => handleImageChange(e)}
+                        className=""
+                      />
                     </div>
-                  )}
-                  <div className="pointer-none text-blue-600 hover:underline ">
-                    <button
-                      style={{
-                        display: "block",
-                        width: "120px",
-                        height: "30px",
-                      }}
-                      onClick={handleFileClick}
-                    >
-                      Select Image
-                    </button>
-                    <input
-                      type="file"
-                      id="getImage"
-                      accept="image/jpg,image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleImageChange(e)}
-                      className=""
-                    />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <button
-              type="submit"
-              id="submitButton"
-              className="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4 rounded-full tracking-wide font-semibold focus:outline-none focus:shadow-outline shadow-lg cursor-pointer transition ease-in duration-300"
-            >
-              Upload
-            </button>
-          </div>
-        </form>
+            <div>
+              <button
+                type="submit"
+                id="submitButton"
+                className="my-5 w-full flex justify-center bg-[#ff96ed] hover:bg-[#db7ac9] hover:scale-105 text-gray-100 p-4 rounded-md tracking-wide font-semibold focus:outline-none focus:shadow-outline shadow-lg cursor-pointer transition ease-in duration-300"
+              >
+                Create Post
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
