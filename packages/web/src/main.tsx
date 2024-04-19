@@ -13,8 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <KindeProvider
       audience={import.meta.env.VITE_APP_KINDE_AUDIENCE}
-      clientId="eca349faf9d44004b2c5a06682fdeced"
-      domain="https://breadscorner.kinde.com"
+      clientId={import.meta.env.VITE_KINDE_CLIENT_ID}
+      domain={import.meta.env.VITE_KINDE_DOMAIN}
       logoutUri={window.location.origin}
       redirectUri={window.location.origin}
     >
