@@ -124,7 +124,7 @@ function HomePage() {
           {posts.map((post) => (
             <div
               key={post.id}
-              className="rounded bg-white border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
+              className="rounded bg-white border border-gray-200 shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
               onClick={(e) => {
                 const target = e.target as HTMLElement;
                 if (!target.closest || !target.closest(".like-button")) {
